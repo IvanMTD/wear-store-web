@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Title</title>
+    </head>
+
+    <body>
+        <header th:insert="~{blocks/header}"></header>
+
+        <div th:if="${admin}" class="add-new-item-button">
+            <form th:method="GET" th:action="@{/catalog/new}" id="addForm"></form>
+            <span>Права администратора: </span>
+            <a onclick="document.getElementById('addForm').submit()" href="#">Хотите добавить новый товар?</a>
+            <hr/>
+        </div>
+
+        <div class="catalog-list">
+            <div th:each="item : ${catalog}">
+                <a th:href="@{/catalog/{id}(id=${item.getId()})}">
+                    <img th:src="'data:image/png;base64,' + ${imageUtil.getImgData(item.getImage())}" width="256" height="256" />
+                </a>
+                <p>
+                    <span th:text="${item.getName()}" id="name"></span>
+                </p>
+                <hr/>
+            </div>
+        </div>
+    </body>
 </html>

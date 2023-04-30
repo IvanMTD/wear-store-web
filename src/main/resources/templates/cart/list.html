@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Title</title>
+    </head>
+
+    <body>
+        <header th:insert="~{blocks/header}"></header>
+        <div>
+            <div th:each="item : ${cartCatalog}">
+                <p>
+                    <label for="name">Имя: </label>
+                    <span th:text="${item.getName()}" id="name"></span>
+                </p>
+                <p>
+                    <label for="size">Размер: </label>
+                    <span th:text="${item.getSize()}" id="size"></span>
+                </p>
+                <p>
+                    <label for="coast">Цена: </label>
+                    <span th:text="${item.getCoast()}" id="coast"></span>
+                </p>
+                <hr/>
+            </div>
+            <div>
+                <label for="totalCoast">Стоимость: </label>
+                <span th:text="${totalCoast}" id="totalCoast"></span>
+            </div>
+            <hr/>
+            <form th:method="POST" th:action="@{/cart/create}">
+                <input type="submit" value="Создать"/>
+            </form>
+        </div>
+    </body>
 </html>

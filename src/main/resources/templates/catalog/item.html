@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Title</title>
+    </head>
+
+    <body>
+        <header th:insert="~{blocks/header}"></header>
+        <div class="item-info">
+            <img th:src="'data:image/png;base64,' + ${imageUtil.getImgData(item.getImage())}" width="256" height="256" />
+            <p>
+                <label for="name">Имя: </label>
+                <span th:text="${item.getName()}" id="name"></span>
+            </p>
+            <p>
+                <label for="description">Описание: </label>
+                <span th:text="${item.getDescription()}" id="description"></span>
+            </p>
+            <p>
+                <label for="size">Размер: </label>
+                <span th:text="${item.getSize()}" id="size"></span>
+            </p>
+            <p>
+                <label for="coast">Цена: </label>
+                <span th:text="${item.getCoast()}" id="coast"></span>
+            </p>
+            <p>
+                <label for="discount">Скидка: </label>
+                <span th:text="${item.getDiscount()}" id="discount"></span>
+            </p>
+            <form th:method="POST" th:action="@{/catalog/{id}(id=${item.getId()})}" th:object="${item}">
+                <input type="submit" value="Добавить в корзину"/>
+            </form>
+        </div>
+    </body>
 </html>

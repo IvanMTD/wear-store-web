@@ -3,22 +3,24 @@ package ru.wear.store.web.models;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
-public class Order {
-    private List<Clothes> clothesList = new ArrayList<>();
+public class ClientOrder {
+    private long id;
+    private Client client;
+    private List<Product> products = new ArrayList<>();
 
-    public void addClothes(Clothes clothes){
-        clothesList.add(clothes);
+    public void addProduct(Product product){
+        products.add(product);
     }
 
     public BigDecimal getTotalCoast(){
         BigDecimal totalCoast = new BigDecimal(0);
-        for(Clothes clothes : clothesList){
-            totalCoast = totalCoast.add(clothes.getCoast());
+        for(Product product : products){
+            totalCoast = totalCoast.add(product.getCoast());
         }
         return totalCoast;
     }

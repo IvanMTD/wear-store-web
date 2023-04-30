@@ -1,14 +1,12 @@
 package ru.wear.store.web.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Data
-@AllArgsConstructor
-public class Clothes {
+public class Product {
     private long id;
     private String name;
     private String description;
@@ -17,6 +15,11 @@ public class Clothes {
     private BigDecimal coast;
     private int discount;
     private boolean outOfStock;
+
+    public Product(){
+        coast = new BigDecimal(0);
+        discount = 0;
+    }
 
     public BigDecimal getCoast(){
         float percent = ((100.0f - (float)(Math.min(discount, 100))) / 100.0f);

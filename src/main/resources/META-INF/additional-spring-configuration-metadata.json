@@ -1,1 +1,8 @@
-{ "properties": [ ] }
+{
+  "properties": [
+    {
+      "name": "app.registration",
+      "type": "java.lang.String",
+      "description": "Description for app.registration."
+    }
+  ] }

@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Title</title>
+    </head>
+
+    <body>
+        <header th:insert="~{blocks/header}"></header>
+        <p>
+            <form th:method="POST" th:action="@{/registration/new}" th:object="${client}">
+                <h3>Данные аккаунта</h3>
+                <input type="text" placeholder="Имя пользователя" id="username" th:field="*{username}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">error</div>
+                <input type="password" placeholder="Пароль" id="password" th:field="*{password}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</div>
+                <input type="password" placeholder="Подтверждение пароля" id="password_confirm" th:field="*{confirmPassword}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">error</div>
+
+                <h3>Данные клиента</h3>
+                <input type="text" placeholder="Фамилия" id="surname" th:field="*{surname}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">error</div>
+                <input type="text" placeholder="Имя" id="name" th:field="*{name}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</div>
+                <input type="text" placeholder="Отчество" id="middleName" th:field="*{middleName}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">error</div>
+                <label for="gender">Ваш пол: </label>
+                <select th:field="*{gender}" id="gender">
+                    <option th:each="gender : ${genders}" th:value="${gender}" th:text="${gender.getDescription()}"></option>
+                </select><br>
+                <label for="birthdate">Дата рождения: </label>
+                <input type="date" id="birthdate" th:field="*{birthdate}"><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}">error</div>
+                <input type="email" placeholder="E-Mail" id="e-mail" th:field="*{eMail}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('eMail')}" th:errors="*{eMail}">error</div>
+                <input type="text" placeholder="Номер телефона" id="phoneNumber" th:field="*{phoneNumber}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">error</div>
+
+                <h3>Данные доставки</h3>
+                <label for="index">Почтовый Индекс: </label>
+                <input type="number" id="index" th:field="*{index}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('index')}" th:errors="*{index}">error</div>
+                <input type="text" placeholder="Страна" id="country" th:field="*{country}"><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">error</div>
+                <input type="text" placeholder="Область" id="state" th:field="*{state}"><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">error</div>
+                <input type="text" placeholder="Город" id="city" th:field="*{city}"><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">error</div>
+                <input type="text" placeholder="Улица" id="street" th:field="*{street}"><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">error</div>
+                <label for="houseNumber">Номер дома: </label>
+                <input type="number" id="houseNumber" th:field="*{houseNumber}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">error</div>
+                <label for="apartmentNumber">Квартира: </label>
+                <input type="number" id="apartmentNumber" th:field="*{apartmentNumber}"/><br/>
+                <div style="color:red" th:if="${#fields.hasErrors('apartmentNumber')}" th:errors="*{apartmentNumber}">error</div>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </p>
+    </body>
 </html>

@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="${title}">Title</title>
+        <script>
+            submitForm = function (){
+                document.getElementById('imageForm').submit();
+                document.getElementById('dataForm').submit();
+            }
+        </script>
+    </head>
+
+    <body>
+        <header th:insert="~{blocks/header}"></header>
+        <div>
+            <!--<form th:method="POST" th:action="@{/catalog/add}" enctype="multipart/form-data" id="imageForm">
+                <label for="file">Изображение: </label>
+                <input type="file" accept="image/png" name="file" id="file"/><br/>
+            </form>-->
+
+            <form th:method="POST" th:action="@{${postUrl} + '?' + ${_csrf.getParameterName()} + '=' + ${_csrf.getToken()}}" th:object="${product}" enctype="multipart/form-data" id="dataForm">
+
+                <label for="file">Изображение: </label>
+                <input type="file" accept="image/png" name="file" id="file"/><br/>
+
+                <input type="text" placeholder="Название" th:field="*{name}"/><br/>
+                <textarea type="text" placeholder="Описание" th:field="*{description}" cols="21" rows="10" style="resize: none"></textarea><br/>
+                <input type="text" placeholder="Размер" th:field="*{size}"/><br/>
+                <input type="text" placeholder="Цена" th:field="*{coast}"/>Цена<br/>
+                <input type="number" placeholder="Скидка" th:field="*{discount}"/>Скидка<br/>
+
+                <input type="submit" value="Отправить"/>
+            </form>
+
+            <!--<input type="button" value="Отправить" onclick="submitForm()"/>-->
+        </div>
+        <hr/>
+    </body>
 </html>
